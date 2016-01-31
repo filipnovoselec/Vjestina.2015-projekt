@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="projekt_v3.CalendarPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:projekt_v3"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="750">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Calendar Grid.Column="0" Grid.Row="0" DisplayMode="Month"
+                  Margin="0,10,10,10">
+
+        </Calendar>
+        <TextBlock x:Name="DescLabel"
+                   Grid.Column="0"
+                   Grid.Row="3"
+                   Grid.ColumnSpan="1"
+                   TextWrapping="WrapWithOverflow"
+                   MaxWidth="170"
+                   Margin="10"/>
+
+
+        <ListView Name="EventListView"
+                  Grid.Column="1"
+                  Grid.Row="0"
+                  Grid.RowSpan="4"
+                  HorizontalContentAlignment="Stretch" SelectionChanged="EventListView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="75">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="EventName"
+                                   Text="{Binding Event}"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   FontWeight="Bold"
+                                   FontSize="20"
+                                   HorizontalAlignment="Left"
+                                   MaxWidth="200"
+                                   TextWrapping="WrapWithOverflow"/>
+
+                        <TextBlock x:Name="Date"
+                                   Text="{Binding Date, StringFormat={}{0:dd/MM/yyyy}}"
+                                   Grid.Column="0"
+                                   Grid.Row="1"
+                                   FontSize="12"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="Description"
+                                   Text="{Binding Description}"
+                                   Grid.Column="1"
+                                   Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   FontSize="10"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,0,0"
+                                   TextWrapping="WrapWithOverflow"/>
+                        <Border Grid.Column="1"
+                                Grid.RowSpan="2"
+                                BorderBrush="Black"
+                                BorderThickness="0.5"
+                                Margin="10,0,0,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="Yellow"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="0.5"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <Button x:Name="AddEvent"
+                Grid.Column="0"
+                Grid.Row="1"
+                Content="Kreiraj novi događaj"
+                FontWeight="Bold"
+                Height="50"
+                Margin="0,30,10,10" Click="AddEvent_Click"/>
+
+        <Button x:Name="DeleteEvent"
+                Grid.Column="0"
+                Grid.Row="2"
+                Content="Obriši događaj"
+                FontWeight="Bold"
+                Height="50"
+                Margin="0,30,10,10" Click="DeleteEvent_Click"/>
+
+    </Grid>
+</UserControl>

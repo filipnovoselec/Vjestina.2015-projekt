@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GradedbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Columns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Column" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Coeficient" Type="float" />
+          <Property Name="Rule" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+          <Property Name="ColumnId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Isvirtual" Type="int" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WantedAvg" Type="float" Nullable="false" />
+          <Property Name="CurrentAvg" Type="float" />
+          <Property Name="NeededGrades" Type="nvarchar" MaxLength="50" />
+          <Property Name="nGrades" Type="int" Nullable="false" />
+          <Property Name="Pcolumn" Type="int" Nullable="false" />
+          <Property Name="ColName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Mode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Avg" Type="float" />
+          <Property Name="Rule" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Columns_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Columns" Type="Self.Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grades_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="ColumnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plan_Columns">
+          <End Role="Columns" Type="Self.Columns" Multiplicity="1" />
+          <End Role="Plan" Type="Self.Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Columns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="Pcolumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GradedbModelStoreContainer">
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Columns" EntityType="Self.Columns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plan" EntityType="Self.Plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Columns_Subjects" Association="Self.FK_Columns_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Columns" Association="Self.FK_Grades_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_Columns" Association="Self.FK_Plan_Columns">
+            <End Role="Columns" EntitySet="Columns" />
+            <End Role="Plan" EntitySet="Plan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GradedbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Column">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColumnName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Coeficient" Type="Double" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Columns_Subjects" FromRole="Columns" ToRole="Subjects" />
+          <NavigationProperty Name="Grades" Relationship="GradedbModel.FK_Grades_Columns1" FromRole="Column" ToRole="Grade" />
+          <NavigationProperty Name="Plans" Relationship="GradedbModel.FK_Plan_Columns" FromRole="Column" ToRole="Plan" />
+          <Property Name="Rule" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GradeValue" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ColumnId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Column" Relationship="GradedbModel.FK_Grades_Columns1" FromRole="Grade" ToRole="Column" />
+          <Property Name="Isvirtual" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Columns" Relationship="Self.FK_Columns_Subjects" FromRole="Subjects" ToRole="Columns" />
+          <Property Name="Avg" Type="Double" />
+          <Property Name="Rule" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Columns_Subjects">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Columns" Type="Self.Column" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Columns">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GradedbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Columns" EntityType="Self.Column" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <AssociationSet Name="FK_Columns_Subjects" Association="Self.FK_Columns_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Columns" EntitySet="Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grades_Columns1" Association="GradedbModel.FK_Grades_Columns1">
+            <End Role="Column" EntitySet="Columns" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
+          <EntitySet Name="Calendars" EntityType="GradedbModel.Calendar" />
+          <EntitySet Name="Plans" EntityType="GradedbModel.Plan" />
+          <AssociationSet Name="FK_Plan_Columns" Association="GradedbModel.FK_Plan_Columns">
+            <End Role="Column" EntitySet="Columns" />
+            <End Role="Plan" EntitySet="Plans" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Grades_Columns1">
+          <End Type="GradedbModel.Column" Role="Column" Multiplicity="1" />
+          <End Type="GradedbModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ColumnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Event" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Plan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WantedAvg" Type="Double" Nullable="false" />
+          <Property Name="CurrentAvg" Type="Double" />
+          <Property Name="nGrades" Type="Int32" Nullable="false" />
+          <Property Name="NeededGrades" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pcolumn" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Column" Relationship="GradedbModel.FK_Plan_Columns" FromRole="Plan" ToRole="Column" />
+          <Property Name="ColName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Mode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Plan_Columns">
+          <End Type="GradedbModel.Column" Role="Column" Multiplicity="1" />
+          <End Type="GradedbModel.Plan" Role="Plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Column">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Plan">
+              <PropertyRef Name="Pcolumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GradedbModelStoreContainer" CdmEntityContainer="GradedbEntities1">
+          <EntitySetMapping Name="Columns">
+            <EntityTypeMapping TypeName="GradedbModel.Column">
+              <MappingFragment StoreEntitySet="Columns">
+                <ScalarProperty Name="Rule" ColumnName="Rule" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ColumnName" ColumnName="Column" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Coeficient" ColumnName="Coeficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="GradedbModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="Isvirtual" ColumnName="Isvirtual" />
+                <ScalarProperty Name="ColumnId" ColumnName="ColumnId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GradeValue" ColumnName="Grade" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="GradedbModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Rule" ColumnName="Rule" />
+                <ScalarProperty Name="Avg" ColumnName="Avg" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubjectName" ColumnName="Subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendars">
+            <EntityTypeMapping TypeName="GradedbModel.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plans">
+            <EntityTypeMapping TypeName="GradedbModel.Plan">
+              <MappingFragment StoreEntitySet="Plan">
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="ColName" ColumnName="ColName" />
+                <ScalarProperty Name="Pcolumn" ColumnName="Pcolumn" />
+                <ScalarProperty Name="NeededGrades" ColumnName="NeededGrades" />
+                <ScalarProperty Name="nGrades" ColumnName="nGrades" />
+                <ScalarProperty Name="CurrentAvg" ColumnName="CurrentAvg" />
+                <ScalarProperty Name="WantedAvg" ColumnName="WantedAvg" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

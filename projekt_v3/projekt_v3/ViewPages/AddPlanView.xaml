@@ -1,0 +1,132 @@
+﻿<Page x:Class="projekt_v3.ViewPages.AddPlanView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:projekt_v3.ViewPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="AddPlanView">
+
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Predmet:"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"
+               Grid.Column="0"
+               Grid.Row="0"/>
+
+        <Label Content="Željeni prosjek:"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"
+               Grid.Column="0"
+               Grid.Row="1"/>
+
+        <Label Content="Put do prosjeka:"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"
+               Grid.Column="0"
+               Grid.Row="2"/>
+
+        <Label Content="Broj ocjena:"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"
+               Grid.Column="0"
+               Grid.Row="3"/>
+
+        <Label Content="Rubrika:"
+               FontSize="16"
+               FontWeight="Bold"
+               Margin="10"
+               Grid.Column="0"
+               Grid.Row="4"/>
+
+        <ComboBox x:Name="PlanSub"
+                  FontSize="16"
+                  Margin="10"
+                  Grid.Column="1"
+                  Grid.Row="0" SelectionChanged="PlanSub_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding SubjectName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+
+        <ComboBox x:Name="PlanMode"
+                  FontSize="16"
+                  Margin="10"
+                  Grid.Column="1"
+                  Grid.Row="2">
+            <ComboBoxItem Tag="mini" IsSelected="True">Minimalni trud</ComboBoxItem>
+            <ComboBoxItem Tag="fast">Najbrže</ComboBoxItem>
+            <ComboBoxItem Tag="prog">Postupni napredak</ComboBoxItem>
+
+
+        </ComboBox>
+
+        <ComboBox x:Name="pColumn"
+                  FontSize="16"
+                  Margin="10"
+                  Grid.Column="1"
+                  Grid.Row="4">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ColumnName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBox x:Name="Num"
+                 FontSize="16"
+                 Margin="10"
+                 Grid.Column="1"
+                 Grid.Row="3" TextChanged="Num_TextChanged"  />
+
+        <TextBox x:Name="avg"
+                 FontSize="16"
+                 Margin="10"
+                 Grid.Column="1"
+                 Grid.Row="1" TextChanged="avg_TextChanged"  />
+
+        <Button x:Name="AddPlan"
+                Content="Kreiraj Plan"
+                FontSize="20"
+                FontWeight="Bold"
+                Margin="10"
+                Width="300"
+                Grid.Row="5"
+                Height="50" Click="AddPlan_Click"/>
+
+        <Button Content="Odustani"
+                FontSize="20"
+                FontWeight="Bold"
+                Margin="10"
+                Width="300"
+                Grid.Column="1"
+                Grid.Row="5"
+                Height="50"
+                HorizontalAlignment="Left" Click="Button_Click"/>
+
+
+    </Grid>
+</Page>

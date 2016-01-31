@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fd79d833ef384b3fb2dbcc0e06c478f1" Name="Diagram1">
+        <EntityTypeShape EntityType="GradedbModel.Column" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GradedbModel.Grade" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GradedbModel.Subject" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="GradedbModel.FK_Columns_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="GradedbModel.FK_Grades_Columns1" />
+        <EntityTypeShape EntityType="GradedbModel.Calendar" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="GradedbModel.Plan" Width="1.5" PointX="2.75" PointY="4.75" />
+        <AssociationConnector Association="GradedbModel.FK_Plan_Columns" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
