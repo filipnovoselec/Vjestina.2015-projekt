@@ -42,7 +42,7 @@
           <Property Name="Subject" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="WantedAvg" Type="float" Nullable="false" />
           <Property Name="CurrentAvg" Type="float" />
-          <Property Name="NeededGrades" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeededGrades" Type="nvarchar" MaxLength="200" />
           <Property Name="nGrades" Type="int" Nullable="false" />
           <Property Name="Pcolumn" Type="int" Nullable="false" />
           <Property Name="ColName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -212,7 +212,7 @@
           <Property Name="WantedAvg" Type="Double" Nullable="false" />
           <Property Name="CurrentAvg" Type="Double" />
           <Property Name="nGrades" Type="Int32" Nullable="false" />
-          <Property Name="NeededGrades" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeededGrades" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Pcolumn" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Column" Relationship="GradedbModel.FK_Plan_Columns" FromRole="Plan" ToRole="Column" />
           <Property Name="ColName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />

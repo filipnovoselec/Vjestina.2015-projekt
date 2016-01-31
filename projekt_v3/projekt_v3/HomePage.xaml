@@ -26,6 +26,7 @@
                 Grid.Row="2"
                 Margin="10"
                 Content="Ocjene"
+                FontSize="30"
                 Background="#909090"
                 Click="GradeButton_Click"
                 />
@@ -36,6 +37,7 @@
                 Grid.Row="2"
                 Margin="10"
                 Content="Plan"
+                FontSize="30"
                 Background="#909090"
                 Click="PlanButton_Click"
                 />
@@ -46,6 +48,7 @@
                 Grid.Row="2"
                 Margin="10"
                 Content="Kalendar"
+                FontSize="30"
                 Background="#909090"
                 Click="CalendarButton_Click"
                 />
