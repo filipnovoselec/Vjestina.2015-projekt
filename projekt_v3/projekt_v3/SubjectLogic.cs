@@ -37,7 +37,7 @@ namespace projekt_v3
                     {
                         foreach (var Gra in db.Grades.Where(p => p.ColumnId == Col.Id))
                         {
-                            Sum += Gra.GradeValue;
+                            Sum += (double) Gra.GradeValue;
                             Divider++;
                         }
                     }
@@ -81,7 +81,7 @@ namespace projekt_v3
                     {
                         foreach (var Gra in db.Grades.Where(p => p.ColumnId == Col.Id))
                         {
-                            Product *= Gra.GradeValue;
+                            Product *= (double)Gra.GradeValue;
                             Root++;
                         }
                     }
@@ -125,7 +125,7 @@ namespace projekt_v3
                     {
                         foreach (var Gra in db.Grades.Where(p => p.ColumnId == Col.Id))
                         {
-                            Sum += 1 / Gra.GradeValue;
+                            Sum += 1 / (double)Gra.GradeValue;
                             Num++;
                         }
                     }

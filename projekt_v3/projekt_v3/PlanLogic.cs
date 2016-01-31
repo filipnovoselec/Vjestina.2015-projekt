@@ -12,10 +12,14 @@ namespace projekt_v3
         {
             using (var db = new GradedbEntities1())
             {
+                var Sub = db.Subjects.FirstOrDefault(p => p.Id == this.SubjectId);
+
+                bool check = Sub.Avg > WantedAvg;
+
                 if (this.Mode == 1)
                 {
                     bool flag = true;
-                    var Sub = db.Subjects.FirstOrDefault(p => p.Id == this.SubjectId);
+                    
 
                     for (int i = 1; i <= this.nGrades; i++)
                     {
@@ -23,8 +27,9 @@ namespace projekt_v3
                     }
                     db.SaveChanges();
 
-                    while (flag && Sub.Avg < this.WantedAvg)
+                    while ((flag && Sub.Avg < this.WantedAvg)||check)
                     {
+                        check = false;
                         for (int i = 1; i <= this.nGrades; i++)
                         {
                             var ele = db.Grades.FirstOrDefault(p => p.Isvirtual == i);
@@ -64,7 +69,7 @@ namespace projekt_v3
                 else if (this.Mode == 2)
                 {
                     bool flag = true;
-                    var Sub = db.Subjects.FirstOrDefault(p => p.Id == this.SubjectId);
+                    
 
                     for (int i = 1; i <= this.nGrades; i++)
                     {
@@ -110,7 +115,7 @@ namespace projekt_v3
                 else
                 {
                     bool flag = true;
-                    var Sub = db.Subjects.FirstOrDefault(p => p.Id == this.SubjectId);
+                    
 
                     for (int i = 1; i <= this.nGrades; i++)
                     {

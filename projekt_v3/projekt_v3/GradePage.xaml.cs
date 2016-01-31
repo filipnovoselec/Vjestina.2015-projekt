@@ -78,7 +78,7 @@ namespace projekt_v3
                     
                     if (db.Plans.FirstOrDefault(p => p.SubjectId == sub.Id) != null)
                     {
-                        db.Plans.Remove(db.Plans.FirstOrDefault(p => p.SubjectId == sub.Id));
+                        db.Plans.RemoveRange(db.Plans.Where(p => p.SubjectId == sub.Id));
                     }
                     db.Subjects.Remove(db.Subjects.FirstOrDefault(p => p.Id == sub.Id));
                     db.SaveChanges();
